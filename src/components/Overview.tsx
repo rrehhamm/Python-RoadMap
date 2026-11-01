@@ -2,6 +2,8 @@ import { useMemo } from 'react'
 import { recommend, tally } from '../lib/progress'
 import { useRoadmap } from '../state/roadmap'
 import { formatMinutes } from './format'
+import { CountUp } from './fx/CountUp'
+import SpotlightCard from './fx/SpotlightCard'
 import { StatusIcon } from './StatusIcon'
 
 export function Overview() {
@@ -16,7 +18,7 @@ export function Overview() {
       <div className="ov-progress">
         <div className="ov-figure">
           <span className="ov-percent" data-testid="overall-percent">
-            {overall.percent}
+            <CountUp value={overall.percent} />
             <span className="ov-unit">%</span>
           </span>
           <span className="ov-caption">complete</span>
@@ -62,19 +64,21 @@ export function Overview() {
         <h2 className="eyebrow">{rec.reason === 'continue' ? 'Continue where you left off' : rec.reason === 'next' ? 'Recommended next' : 'Roadmap complete'}</h2>
         {rec.primary ? (
           <>
-            <button type="button" className="next-card" onClick={(e) => openTopic(rec.primary!.id, e.currentTarget)}>
-              <StatusIcon status={availability(rec.primary)} />
-              <span className="next-body">
-                <span className="next-title">{rec.primary.title}</span>
-                <span className="next-meta">
-                  Stage {index.stageById.get(rec.primary.stageId)!.number} · {index.stageById.get(rec.primary.stageId)!.title} ·{' '}
-                  {formatMinutes(rec.primary.estimatedMinutes)}
+            <SpotlightCard className="next-spot" theme="light" spotlightColor="var(--accent)" intensity={0.5} borderGlow={0.9} spotlightSize={220}>
+              <button type="button" className="next-card" onClick={(e) => openTopic(rec.primary!.id, e.currentTarget)}>
+                <StatusIcon status={availability(rec.primary)} />
+                <span className="next-body">
+                  <span className="next-title">{rec.primary.title}</span>
+                  <span className="next-meta">
+                    Stage {index.stageById.get(rec.primary.stageId)!.number} · {index.stageById.get(rec.primary.stageId)!.title} ·{' '}
+                    {formatMinutes(rec.primary.estimatedMinutes)}
+                  </span>
                 </span>
-              </span>
-              <span className="next-go" aria-hidden="true">
-                Open →
-              </span>
-            </button>
+                <span className="next-go" aria-hidden="true">
+                  Open →
+                </span>
+              </button>
+            </SpotlightCard>
             {rec.alternatives.length > 0 && (
               <div className="next-alts">
                 <span className="muted">Also unlocked:</span>

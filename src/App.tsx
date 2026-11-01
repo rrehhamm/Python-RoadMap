@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { SplitHeading } from './components/fx/SplitHeading'
 import { Overview } from './components/Overview'
+import { gsap, prefersReducedMotion, useGSAP } from './motion/gsap'
+import { useSmoothScroll } from './motion/useSmoothScroll'
 import { Roadmap } from './components/Roadmap'
 import { Toolbar } from './components/Toolbar'
 import { TopicDrawer } from './components/TopicDrawer'
@@ -52,6 +55,26 @@ function ThemeToggle() {
 
 function Page() {
   const { selectedId } = useRoadmap()
+  const introRef = useRef<HTMLElement>(null)
+  useSmoothScroll()
+
+  // One-time entrance: copy, overview and toolbar settle in under the heading.
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return
+      gsap.from('.intro .lede, .overview, .toolbar', {
+        y: 14,
+        opacity: 0,
+        duration: 0.6,
+        ease: 'power2.out',
+        stagger: 0.08,
+        delay: 0.25,
+        clearProps: 'transform,opacity',
+      })
+    },
+    { scope: introRef },
+  )
+
   return (
     <div className={`app${selectedId ? ' app--drawer' : ''}`}>
       <a className="skip" href="#roadmap">
@@ -66,9 +89,9 @@ function Page() {
         </div>
         <ThemeToggle />
       </header>
-      <main>
+      <main ref={introRef}>
         <div className="intro">
-          <h1>Python → Competitive Programming</h1>
+          <SplitHeading>Python → Competitive Programming</SplitHeading>
           <p className="lede">
             A personal roadmap from your first <code>input()</code> to Codeforces 1200 and core algorithms. Stages unlock as you finish their
             prerequisites; the Codeforces track runs alongside from day one.

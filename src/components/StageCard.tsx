@@ -1,5 +1,7 @@
+import { useRef } from 'react'
 import type { Stage, Topic } from '../data/types'
 import { tally } from '../lib/progress'
+import { gsap, prefersReducedMotion, useGSAP } from '../motion/gsap'
 import { useRoadmap } from '../state/roadmap'
 import { StatusIcon } from './StatusIcon'
 import { AVAILABILITY_LABEL, DIFFICULTY_LABEL, formatMinutes } from './format'
@@ -13,6 +15,18 @@ export function StageCard({ stage, requires }: { stage: Stage; requires: Stage[]
   const isCurrent = currentStage === stage.id
   const done = t.completed === t.total
   const bodyId = `stage-body-${stage.id}`
+  const listRef = useRef<HTMLUListElement>(null)
+  const userOpened = useRef(false)
+
+  // Rows cascade in only when the user opens the stage themselves.
+  useGSAP(
+    () => {
+      if (!open || !userOpened.current || !listRef.current || prefersReducedMotion()) return
+      userOpened.current = false
+      gsap.from(listRef.current.children, { opacity: 0, y: -6, duration: 0.28, ease: 'power2.out', stagger: 0.025, clearProps: 'all' })
+    },
+    { dependencies: [open] },
+  )
 
   return (
     <section
@@ -26,7 +40,10 @@ export function StageCard({ stage, requires }: { stage: Stage; requires: Stage[]
           className="stage-toggle"
           aria-expanded={open}
           aria-controls={bodyId}
-          onClick={() => toggleStage(stage.id)}
+          onClick={() => {
+            userOpened.current = !open
+            toggleStage(stage.id)
+          }}
           disabled={filtering}
         >
           <span className="stage-num mono">{String(stage.number).padStart(2, '0')}</span>
@@ -56,7 +73,7 @@ export function StageCard({ stage, requires }: { stage: Stage; requires: Stage[]
         )}
       </header>
       {open && (
-        <ul className="topics" id={bodyId}>
+        <ul className="topics" id={bodyId} ref={listRef}>
           {visible.map((topic) => (
             <TopicRow key={topic.id} topic={topic} />
           ))}

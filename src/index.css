@@ -3,76 +3,94 @@
   --font: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
-  --bg: #f6f5f2;
-  --surface: #ffffff;
-  --surface-2: #f0eee9;
-  --border: #e2dfd8;
-  --border-strong: #cfcbc2;
-  --text: #1a1c20;
-  --text-2: #3e4148;
-  --muted: #6b6e75;
-  --done: #1d7f53;
-  --done-soft: #e3f2ea;
-  --wip: #a8650f;
-  --wip-soft: #fbf0dd;
-  --locked: #9a9ca2;
-  --focus: #2f6fdb;
-  --danger: #b4372f;
-  --edge: #c4c0b7;
-  --on-accent: #ffffff;
-  --code-bg: #f3f1ec;
-  --shadow: 0 1px 2px rgb(20 20 20 / 0.04), 0 2px 8px rgb(20 20 20 / 0.04);
+  /* Palette: #C4C3E3 pastel violet · #504E76 dark violet · #FDF8E2 beige
+     #A3B565 calm green · #FCDD9D light orange · #F1642E vivid orange.
+     Text-on-background pairs are darkened/lightened variants for AA contrast. */
+  --bg: #fdf8e2;
+  --surface: #fffdf5;
+  --surface-2: #f6f0d6;
+  --border: #ebe3c6;
+  --border-strong: #d6cba4;
+  --text: #2b2946;
+  --text-2: #504e76;
+  --muted: #65638a;
+  --accent: #504e76;
+  --accent-soft: #c4c3e3;
+  --accent-tint: #efeef8;
+  --done: #5e7027;
+  --done-fill: #94a852;
+  --done-soft: #eef2dc;
+  --wip: #f1642e;
+  --wip-ink: #b2410f;
+  --wip-soft: #fdebc4;
+  --locked: #a3a1bf;
+  --focus: #504e76;
+  --danger: #b42318;
+  --edge: #c4c3e3;
+  --on-accent: #fffdf5;
+  --code-bg: #f8f2dc;
+  --shadow: 0 1px 2px rgb(80 78 118 / 0.06), 0 4px 14px rgb(80 78 118 / 0.06);
 
-  --radius: 10px;
-  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-sm: 8px;
   --graph-gap: 40px;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #0e1012;
-    --surface: #15181b;
-    --surface-2: #1b1f23;
-    --border: #262b31;
-    --border-strong: #353b42;
-    --text: #e8e6e1;
-    --text-2: #c3c1bc;
-    --muted: #8d9198;
-    --done: #4cc38a;
-    --done-soft: #15291f;
-    --wip: #e4a646;
-    --wip-soft: #2c2213;
-    --locked: #6b7077;
-    --focus: #6ea2ff;
-    --danger: #ef7d74;
-    --edge: #3a4047;
-    --on-accent: #0e1012;
-    --code-bg: #111417;
-    --shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+    --bg: #18172a;
+    --surface: #212036;
+    --surface-2: #2a2943;
+    --border: #353453;
+    --border-strong: #47456e;
+    --text: #fdf8e2;
+    --text-2: #dcdaf0;
+    --muted: #a2a0c4;
+    --accent: #c4c3e3;
+    --accent-soft: #504e76;
+    --accent-tint: #2c2b48;
+    --done: #b6c878;
+    --done-fill: #a3b565;
+    --done-soft: #2b3220;
+    --wip: #f1642e;
+    --wip-ink: #ff8a5c;
+    --wip-soft: #3a2620;
+    --locked: #6e6c90;
+    --focus: #c4c3e3;
+    --danger: #ff8a80;
+    --edge: #4a4874;
+    --on-accent: #18172a;
+    --code-bg: #1c1b30;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 6px 18px rgb(0 0 0 / 0.18);
     color-scheme: dark;
   }
 }
 :root[data-theme='dark'] {
-  --bg: #0e1012;
-  --surface: #15181b;
-  --surface-2: #1b1f23;
-  --border: #262b31;
-  --border-strong: #353b42;
-  --text: #e8e6e1;
-  --text-2: #c3c1bc;
-  --muted: #8d9198;
-  --done: #4cc38a;
-  --done-soft: #15291f;
-  --wip: #e4a646;
-  --wip-soft: #2c2213;
-  --locked: #6b7077;
-  --focus: #6ea2ff;
-  --danger: #ef7d74;
-  --edge: #3a4047;
-  --on-accent: #0e1012;
-  --code-bg: #111417;
-  --shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+  --bg: #18172a;
+  --surface: #212036;
+  --surface-2: #2a2943;
+  --border: #353453;
+  --border-strong: #47456e;
+  --text: #fdf8e2;
+  --text-2: #dcdaf0;
+  --muted: #a2a0c4;
+  --accent: #c4c3e3;
+  --accent-soft: #504e76;
+  --accent-tint: #2c2b48;
+  --done: #b6c878;
+  --done-fill: #a3b565;
+  --done-soft: #2b3220;
+  --wip: #f1642e;
+  --wip-ink: #ff8a5c;
+  --wip-soft: #3a2620;
+  --locked: #6e6c90;
+  --focus: #c4c3e3;
+  --danger: #ff8a80;
+  --edge: #4a4874;
+  --on-accent: #18172a;
+  --code-bg: #1c1b30;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 6px 18px rgb(0 0 0 / 0.18);
   color-scheme: dark;
 }
 
@@ -165,9 +183,9 @@ code,
   place-items: center;
   width: 28px;
   height: 28px;
-  border-radius: 7px;
-  background: var(--text);
-  color: var(--bg);
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--on-accent);
   font-size: 12px;
 }
 .intro {
@@ -180,6 +198,12 @@ h1 {
   letter-spacing: -0.02em;
   margin: 0 0 12px;
   font-weight: 600;
+  color: var(--text);
+}
+/* Room for descenders inside the word masks of the animated heading. */
+.split-word-mask {
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
 }
 .lede {
   margin: 0;
@@ -324,7 +348,7 @@ h1 {
   color: var(--on-accent);
 }
 .seg--full .seg-btn--in_progress[aria-checked='true'] {
-  background: var(--wip);
+  background: var(--wip-ink);
   color: var(--on-accent);
 }
 
@@ -341,7 +365,7 @@ h1 {
 .bar-fill {
   position: absolute;
   inset: 0 auto 0 0;
-  background: var(--done);
+  background: var(--done-fill);
   border-radius: inherit;
   transition: width 0.25s ease;
 }
@@ -380,7 +404,7 @@ h1 {
   white-space: nowrap;
 }
 .badge--current {
-  color: var(--wip);
+  color: var(--wip-ink);
   border-color: color-mix(in srgb, var(--wip) 40%, transparent);
   background: var(--wip-soft);
 }
@@ -455,19 +479,30 @@ h1 {
   margin: 2px 0 0;
   font-weight: 500;
 }
+/* React Bits SpotlightCard, restyled with our tokens. */
+.next-spot.spotlight-card {
+  padding: 0;
+  border-radius: var(--radius);
+  background-color: var(--accent-tint);
+  box-shadow: none;
+}
+.next-spot .spotlight-card__border {
+  background: var(--accent-soft);
+}
 .next-card {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
   width: 100%;
-  padding: 12px 14px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface-2);
+  padding: 14px 16px;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
   text-align: left;
 }
-.next-card:hover {
-  border-color: var(--border-strong);
+.next-card:focus-visible {
+  outline-offset: -3px;
 }
 .next-body {
   display: flex;
@@ -484,9 +519,16 @@ h1 {
 }
 .next-go {
   font-size: 13px;
-  font-weight: 500;
-  color: var(--text-2);
+  font-weight: 600;
+  color: var(--on-accent);
+  background: var(--accent);
+  padding: 5px 12px;
+  border-radius: 999px;
   white-space: nowrap;
+  transition: transform 0.2s ease;
+}
+.next-card:hover .next-go {
+  transform: translateX(3px);
 }
 .next-alts {
   display: flex;
@@ -550,6 +592,15 @@ h1 {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+}
+.legend-diff {
+  flex-wrap: wrap;
+}
+.legend-diff-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 4px;
 }
 
 /* ───────── Roadmap graph ───────── */
@@ -616,6 +667,12 @@ h1 {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.stage:hover {
+  border-color: var(--accent-soft);
 }
 .stage--current {
   border-color: color-mix(in srgb, var(--wip) 55%, var(--border));
@@ -712,7 +769,7 @@ h1 {
   background: var(--border);
 }
 .pip--completed {
-  background: var(--done);
+  background: var(--done-fill);
 }
 .pip--in_progress {
   background: var(--wip);
@@ -747,7 +804,7 @@ h1 {
   text-align: left;
 }
 .row:hover {
-  background: var(--surface-2);
+  background: var(--accent-tint);
 }
 .row-title {
   flex: 1;
@@ -762,8 +819,8 @@ h1 {
   color: var(--text-2);
 }
 .row--selected {
-  background: var(--surface-2);
-  border-color: var(--border-strong);
+  background: var(--accent-tint);
+  border-color: var(--accent-soft);
 }
 .row--prereq {
   border-color: var(--wip);
@@ -789,13 +846,21 @@ h1 {
   border: 1px solid var(--border);
   color: var(--muted);
 }
+/* Difficulty: green → light orange → vivid orange, plus the letter. */
+.diff--easy {
+  color: var(--done);
+  background: var(--done-soft);
+  border-color: color-mix(in srgb, var(--done) 30%, transparent);
+}
 .diff--medium {
-  border-color: var(--border-strong);
-  color: var(--text-2);
+  color: var(--wip-ink);
+  background: var(--wip-soft);
+  border-color: color-mix(in srgb, var(--wip) 35%, transparent);
 }
 .diff--hard {
-  border-color: var(--text-2);
-  color: var(--text);
+  color: var(--on-accent);
+  background: var(--wip-ink);
+  border-color: var(--wip-ink);
 }
 .rail-item {
   position: relative;
@@ -833,7 +898,7 @@ h1 {
 .scrim {
   position: fixed;
   inset: 0;
-  background: rgb(0 0 0 / 0.25);
+  background: rgb(43 41 70 / 0.3);
   z-index: 39;
 }
 .drawer-top {

@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { statusOf } from '../lib/progress'
 import { useRoadmap, type StatusFilter } from '../state/roadmap'
 import { StatusIcon } from './StatusIcon'
+import { DIFFICULTY_LABEL } from './format'
 
 const FILTERS: Array<{ value: StatusFilter; label: string }> = [
   { value: 'all', label: 'All' },
@@ -102,6 +103,17 @@ export function Toolbar() {
             {s === 'in_progress' ? 'In progress' : s === 'locked' ? 'Locked (prerequisites incomplete)' : s[0].toUpperCase() + s.slice(1)}
           </li>
         ))}
+        <li className="legend-diff">
+          <span>Difficulty:</span>
+          {(['easy', 'medium', 'hard'] as const).map((d) => (
+            <span key={d} className="legend-diff-item">
+              <span className={`diff diff--${d}`} aria-hidden="true">
+                {DIFFICULTY_LABEL[d][0]}
+              </span>
+              {DIFFICULTY_LABEL[d]}
+            </span>
+          ))}
+        </li>
       </ul>
     </div>
   )

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { layoutStages } from '../lib/layout'
+import { gsap, prefersReducedMotion, ScrollTrigger, useGSAP } from '../motion/gsap'
 import { tally } from '../lib/progress'
 import { useRoadmap } from '../state/roadmap'
 import { StageCard } from './StageCard'
@@ -112,6 +113,35 @@ export function Roadmap() {
       window.removeEventListener('resize', compute)
     }
   }, [compute])
+
+  // Stage cards fade in as they scroll into view. Opacity only: the SVG edges
+  // are measured from card positions, so moving the cards would misplace them.
+  useGSAP(
+    () => {
+      const c = containerRef.current
+      if (!c || prefersReducedMotion()) return
+      const cards = gsap.utils.toArray<HTMLElement>('.cell, .rail', c)
+      gsap.set(cards, { opacity: 0 })
+      gsap.from('.edges', { opacity: 0, duration: 0.8, delay: 0.5 })
+      ScrollTrigger.batch(cards, {
+        start: 'top 92%',
+        once: true,
+        onEnter: (els) => gsap.to(els, { opacity: 1, duration: 0.5, ease: 'power1.out', stagger: 0.07, overwrite: true }),
+      })
+      // Cards grow and shrink as stages expand, so keep trigger positions fresh.
+      let raf = 0
+      const ro = new ResizeObserver(() => {
+        cancelAnimationFrame(raf)
+        raf = requestAnimationFrame(() => ScrollTrigger.refresh())
+      })
+      ro.observe(c)
+      return () => {
+        cancelAnimationFrame(raf)
+        ro.disconnect()
+      }
+    },
+    { scope: containerRef },
+  )
 
   const requiresOf = (stageId: string) =>
     index.stageEdges.filter((e) => e.to === stageId).map((e) => index.stageById.get(e.from)!)
